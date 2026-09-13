@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clean and Green Tech — Admin & Sanitation Dispatch Console</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Admin Stylesheet (Cache Busted) -->
+  <link rel="stylesheet" href="admin.css?v=3.5" />
+</head>
+<body>
+
+  <!-- Top Admin Navbar -->
+  <header class="admin-navbar">
+    <div class="admin-nav-container">
+      <div class="brand">
+        <div>
+          <div class="team-tag">
+            <i class="fa-solid fa-code"></i> TEAM PIXEL MINDS &bull; MUNICIPAL OPERATIONS
+          </div>
+          <h1 class="brand-title">Clean and Green Tech <span>Admin</span></h1>
+        </div>
+      </div>
+
+      <div class="admin-top-stats">
+        <div class="stat-badge">
+          <span class="pulse-green"></span>
+          <span>OSM Bins: <strong id="stat-osm-bins">31</strong></span>
+        </div>
+        <div class="stat-badge orange">
+          <span>Complaints: <strong id="stat-complaints">0</strong></span>
+        </div>
+        <a href="index.html" class="btn-citizen-app">
+          <i class="fa-solid fa-arrow-left"></i> Citizen Reporter App
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-Header Tab Switcher -->
+  <div class="tab-bar-container">
+    <div class="tab-bar-inner">
+      <button type="button" class="tab-btn active" id="tab-btn-map" data-tab="tab-map">
+        <i class="fa-solid fa-map-location-dot"></i> Spatial Map & Live Routes
+      </button>
+      <button type="button" class="tab-btn" id="tab-btn-complaints" data-tab="tab-complaints">
+        <i class="fa-solid fa-list-check"></i> Complaints Ledger (<span id="badge-complaints-count">0</span>)
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Viewports -->
+  <main class="admin-main">
+
+    <!-- ====================================================================
+         TAB 1: SPATIAL MAP & LIVE TRUCK ROUTING
+         ==================================================================== -->
+    <section class="tab-panel active" id="panel-map">
+      
+      <!-- Operations Toolbar & Legend -->
+      <div class="ops-toolbar">
+        <div class="map-legend">
+          <div class="legend-item">
+            <span class="legend-pin pin-green"><i class="fa-solid fa-trash-can"></i></span>
+            <span>OSM Bins (Green)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-pin pin-orange"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <span>Reported Waste (Orange)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-pin pin-red"><i class="fa-solid fa-circle-exclamation"></i></span>
+            <span>New Bin Required (Red Gap)</span>
+          </div>
+        </div>
+
+        <div class="truck-controls">
+          <div class="truck-live-status">
+            <span class="truck-live-dot"></span>
+            <span id="truck-status-text">PMC Route #04 in Transit • Speed: 26 km/h</span>
+          </div>
+          <button type="button" class="btn-control" id="btn-toggle-truck">
+            <i class="fa-solid fa-pause" id="truck-play-icon"></i> Pause Route
+          </button>
+          <button type="button" class="btn-control" id="btn-reset-map-view">
+            <i class="fa-solid fa-expand"></i> Fit All Pins
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Operations Map Wrapper -->
+      <div class="admin-map-container">
+        <div id="admin-map"></div>
+        <div class="swiggy-tracker-card" id="swiggy-tracker">
+          <div class="tracker-header">
+            <div class="tracker-truck-icon">
+              <i class="fa-solid fa-route"></i>
+            </div>
+            <div>
+              <div class="tracker-title">PMC Waste Clearance Route #04</div>
+              <div class="tracker-eta mono" id="tracker-eta">Estimated ETA: 12 Mins</div>
+            </div>
+          </div>
+          <div class="tracker-progress-track">
+            <div class="tracker-progress-fill" id="tracker-progress"></div>
+          </div>
+          <div class="tracker-route-step mono" id="tracker-step-desc">
+            En route to reported waste blackspot...
+          </div>
+        </div>
+      </div>
+
+      <!-- Infrastructure Gap & Proximity Analytics Strip -->
+      <div class="analytics-strip">
+        <div class="strip-card">
+          <div class="strip-icon green"><i class="fa-solid fa-recycle"></i></div>
+          <div>
+            <div class="strip-val mono" id="strip-bins-val">31</div>
+            <div class="strip-lbl">Existing OSM Bins Tracked</div>
+          </div>
+        </div>
+        <div class="strip-card">
+          <div class="strip-icon orange"><i class="fa-solid fa-circle-radiation"></i></div>
+          <div>
+            <div class="strip-val mono" id="strip-complaints-val">0</div>
+            <div class="strip-lbl">Active Waste Complaints</div>
+          </div>
+        </div>
+        <div class="strip-card">
+          <div class="strip-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div>
+            <div class="strip-val mono" id="strip-gaps-val">0</div>
+            <div class="strip-lbl">Critical Bin Shortage Clusters</div>
+          </div>
+        </div>
+        <div class="strip-card">
+          <div class="strip-icon blue"><i class="fa-solid fa-route"></i></div>
+          <div>
+            <div class="strip-val mono" id="strip-route-km">8.4 km</div>
+            <div class="strip-lbl">Collection Route Loop</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         TAB 2: COMPLAINTS LEDGER & FORENSIC TRIAGE
+         ==================================================================== -->
+    <section class="tab-panel" id="panel-complaints">
+      <div class="ledger-header">
+        <div>
+          <h2><i class="fa-solid fa-clipboard-list"></i> Citizen Complaints & AI Forensics</h2>
+          <p>Click any complaint to inspect annotated bounding boxes, item taxonomy, and EPR liability.</p>
+        </div>
+        <div class="ledger-actions">
+          <input type="text" id="search-complaints" class="ledger-search" placeholder="Search by address, ID..." />
+          <button type="button" class="btn-refresh" id="btn-refresh-complaints">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Complaints Data Table / Cards -->
+      <div class="complaints-grid" id="complaints-container">
+        <div class="loading-state">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Loading complaints ledger...
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FORENSIC INSPECTION DRAWER (MODAL)
+       ==================================================================== -->
+  <div class="modal-backdrop hidden" id="forensic-drawer">
+    <div class="forensic-modal-card">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="drawer-tag" id="drawer-complaint-id">CMP-20260902</span>
+          <h3 id="drawer-title">Forensic Waste Inspection</h3>
+        </div>
+        <button type="button" class="drawer-close" id="btn-drawer-close">&times;</button>
+      </div>
+
+      <div class="drawer-body" id="drawer-content">
+        <!-- Dynamically injected via JavaScript -->
+      </div>
+
+      <div class="drawer-footer">
+        <div class="status-updater">
+          <label for="drawer-status-select">Status:</label>
+          <select id="drawer-status-select" class="status-select">
+            <option value="Pending">Pending</option>
+            <option value="Truck Dispatched">Truck Dispatched</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+          <button type="button" class="btn-update-status" id="btn-update-status">Update</button>
+        </div>
+        <div class="drawer-download-actions">
+          <a href="#" class="btn-drawer-action" id="link-download-json" target="_blank">
+            <i class="fa-solid fa-file-code"></i> report.json
+          </a>
+          <a href="#" class="btn-drawer-action" id="link-download-csv" download>
+            <i class="fa-solid fa-file-csv"></i> report.csv
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Admin Application Logic (Cache Busted) -->
+  <script src="admin.js?v=3.5"></script>
+</body>
+</html>

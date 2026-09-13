@@ -1,0 +1,474 @@
+{
+  "scene_type": "dumpsite",
+  "item_count_total": 20,
+  "items": [
+    {
+      "item_name": "Commercial shed with blue tarpaulin sheeting",
+      "count": 1,
+      "box_2d": [
+        440,
+        0,
+        608,
+        260
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "HDPE tarpaulin & steel wire cage",
+      "resin_code": "2_HDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "occluded",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "Curved metal cage & rebar construction scrap",
+      "count": 1,
+      "box_2d": [
+        431,
+        305,
+        548,
+        680
+      ],
+      "stream": "CND",
+      "material": "scrap steel / rebar",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "occluded",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Discarded wooden charpai cot with soiled mattress & quilt",
+      "count": 1,
+      "box_2d": [
+        537,
+        458,
+        642,
+        742
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "wood, cotton textile, foam",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.94
+    },
+    {
+      "item_name": "Bulky wooden crate / furniture scrap panel",
+      "count": 1,
+      "box_2d": [
+        485,
+        715,
+        641,
+        980
+      ],
+      "stream": "CND",
+      "material": "plywood / timber",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "occluded",
+      "confidence": 0.93
+    },
+    {
+      "item_name": "Stray cattle (calf) actively ingesting waste",
+      "count": 1,
+      "box_2d": [
+        625,
+        0,
+        728,
+        97
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "biological / livestock risk",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "occluded",
+      "confidence": 0.98
+    },
+    {
+      "item_name": "Heavily soiled discarded clothing & fabric rags",
+      "count": 1,
+      "box_2d": [
+        684,
+        18,
+        785,
+        290
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "textiles / cotton / synthetic fabric",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.91
+    },
+    {
+      "item_name": "Multi-wall paper cement sack",
+      "count": 1,
+      "box_2d": [
+        858,
+        239,
+        959,
+        458
+      ],
+      "stream": "CND",
+      "material": "kraft paper / multi-wall paper",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.94
+    },
+    {
+      "item_name": "Torn blue snack laminate wrapper",
+      "count": 1,
+      "box_2d": [
+        843,
+        10,
+        870,
+        73
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "metallized multi-layer plastic (MLP)",
+      "resin_code": "7_OTHER_MLP",
+      "epr_category": "CATEGORY_III_MULTILAYER",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.88
+    },
+    {
+      "item_name": "Mixed thin plastic carry bags & trash liners",
+      "count": 8,
+      "box_2d": [
+        580,
+        275,
+        680,
+        440
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "LDPE film",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Unbranded thin plastic carry bags < 120 microns in violation of PWMR 2022",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Large blue polyethylene tarpaulin bundle",
+      "count": 1,
+      "box_2d": [
+        564,
+        781,
+        693,
+        936
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "HDPE / LDPE tarpaulin",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Woven jute / burlap gunny sack",
+      "count": 1,
+      "box_2d": [
+        623,
+        510,
+        720,
+        665
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "natural jute fiber",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.94
+    },
+    {
+      "item_name": "Green plastic film & netting",
+      "count": 1,
+      "box_2d": [
+        704,
+        390,
+        810,
+        595
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "HDPE / LDPE",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "White woven HDPE sack / pouch",
+      "count": 1,
+      "box_2d": [
+        794,
+        641,
+        859,
+        745
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "woven HDPE",
+      "resin_code": "2_HDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "clean",
+      "confidence": 0.93
+    },
+    {
+      "item_name": "Tender coconut shells (coir husks)",
+      "count": 4,
+      "box_2d": [
+        710,
+        755,
+        758,
+        848
+      ],
+      "stream": "WET",
+      "material": "biodegradable organic / coir",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "clean",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Black plastic tub / rubber disc",
+      "count": 1,
+      "box_2d": [
+        820,
+        902,
+        856,
+        963
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "rigid PP / rubber",
+      "resin_code": "5_PP",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "clean",
+      "confidence": 0.9
+    },
+    {
+      "item_name": "Crushed single-use meal plates & food packaging",
+      "count": 3,
+      "box_2d": [
+        810,
+        463,
+        863,
+        580
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "polystyrene (thermocol) / coated paper",
+      "resin_code": "6_PS",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": true,
+      "sup_violation_reason": "Single-use plastic / thermocol food service plate prohibited under MoEFCC ban",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.91
+    },
+    {
+      "item_name": "White plastic retail carry bag / parcel package",
+      "count": 1,
+      "box_2d": [
+        616,
+        893,
+        713,
+        998
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "LDPE film",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Unbranded plastic shopping bag < 120 microns",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.93
+    },
+    {
+      "item_name": "Printed promotional flyer / paper scrap",
+      "count": 1,
+      "box_2d": [
+        909,
+        741,
+        946,
+        807
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "printed paper / card",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "clean",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "Rotting organic food waste & vegetable peelings",
+      "count": 1,
+      "box_2d": [
+        670,
+        100,
+        770,
+        400
+      ],
+      "stream": "WET",
+      "material": "organic kitchen & market waste",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "buried_partial",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Inert street sweepings, silt & fine C&D gravel",
+      "count": 1,
+      "box_2d": [
+        780,
+        0,
+        860,
+        450
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "soil, sand, road silt",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "buried_partial",
+      "confidence": 0.92
+    }
+  ],
+  "hazard_flag": true,
+  "hazard_items": [
+    "Stray livestock ingestion hazard",
+    "Stagnant organic sludge & vector breeding risk"
+  ],
+  "safety_warning": "Active cattle grazing on plastic polymers poses severe risk of rumen impaction. Workers must wear puncture-resistant gloves and steel-toe gumboots due to hidden sharp metal rebar and broken debris.",
+  "contamination": true,
+  "contaminated_fraction": 0.75,
+  "segregation_verdict": "mixed",
+  "estimated_weight_kg": 450.0,
+  "epr_summary": {
+    "total_plastic_items": 10,
+    "recyclable_plastic_items": 6,
+    "non_recyclable_plastic_items": 4,
+    "sup_violation_count": 3,
+    "brand_owner_liability_share": {
+      "Unbranded / Informal Converter": 100.0
+    }
+  },
+  "disposal_routes": {
+    "municipal_green_bin": [
+      "Tender coconut shells (coir husks)",
+      "Rotting organic food waste & vegetable peelings"
+    ],
+    "municipal_blue_bin": [
+      "Large blue polyethylene tarpaulin bundle",
+      "Commercial shed with blue tarpaulin sheeting",
+      "White woven HDPE sack / pouch",
+      "Woven jute / burlap gunny sack",
+      "Black plastic tub / rubber disc",
+      "Printed promotional flyer / paper scrap"
+    ],
+    "red_bag_sanitary": [],
+    "special_handover_required": [
+      {
+        "items": [
+          "Curved metal cage & rebar construction scrap",
+          "Bulky wooden crate / furniture scrap panel",
+          "Multi-wall paper cement sack",
+          "Discarded wooden charpai cot with soiled mattress & quilt"
+        ],
+        "route": "C&D processing facility & bulky waste collection",
+        "reason": "Bulky metallic rebar and timber require dedicated heavy-vehicle lifting and processing at municipal C&D yards."
+      }
+    ]
+  },
+  "recoverability_summary": "Severe cross-contamination with organic sludge, wet soil, and animal waste significantly degrades dry recyclable recovery value, requiring pre-washing and sorting.",
+  "image_quality_note": "Clear daylight exterior photograph with sharp focus across the middleground, slight overexposure in the sky and minor shadow under the upper awning."
+}

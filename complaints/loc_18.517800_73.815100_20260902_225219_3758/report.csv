@@ -1,0 +1,21 @@
+item_name,count,stream,material,resin_code,epr_category,sup_violation,brand,parent_company,condition,confidence
+Commercial shed with blue tarpaulin sheeting,1,DRY_RECYCLABLE,HDPE tarpaulin & steel wire cage,2_HDPE,CATEGORY_II_FLEXIBLE,False,unidentified,,occluded,0.92
+Curved metal cage & rebar construction scrap,1,CND,scrap steel / rebar,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,occluded,0.95
+Discarded wooden charpai cot with soiled mattress & quilt,1,GENERIC_RESIDUAL,"wood, cotton textile, foam",NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,crumpled,0.94
+Bulky wooden crate / furniture scrap panel,1,CND,plywood / timber,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,occluded,0.93
+Stray cattle (calf) actively ingesting waste,1,GENERIC_RESIDUAL,biological / livestock risk,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,occluded,0.98
+Heavily soiled discarded clothing & fabric rags,1,GENERIC_RESIDUAL,textiles / cotton / synthetic fabric,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,crumpled,0.91
+Multi-wall paper cement sack,1,CND,kraft paper / multi-wall paper,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,crumpled,0.94
+Torn blue snack laminate wrapper,1,DRY_RECYCLABLE,metallized multi-layer plastic (MLP),7_OTHER_MLP,CATEGORY_III_MULTILAYER,False,unidentified,,torn,0.88
+Mixed thin plastic carry bags & trash liners,8,DRY_RECYCLABLE,LDPE film,4_LDPE,CATEGORY_II_FLEXIBLE,True,unidentified,,crumpled,0.95
+Large blue polyethylene tarpaulin bundle,1,DRY_RECYCLABLE,HDPE / LDPE tarpaulin,4_LDPE,CATEGORY_II_FLEXIBLE,False,unidentified,,crumpled,0.96
+Woven jute / burlap gunny sack,1,DRY_RECYCLABLE,natural jute fiber,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,crumpled,0.94
+Green plastic film & netting,1,DRY_RECYCLABLE,HDPE / LDPE,4_LDPE,CATEGORY_II_FLEXIBLE,False,unidentified,,crumpled,0.92
+White woven HDPE sack / pouch,1,DRY_RECYCLABLE,woven HDPE,2_HDPE,CATEGORY_II_FLEXIBLE,False,unidentified,,clean,0.93
+Tender coconut shells (coir husks),4,WET,biodegradable organic / coir,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,clean,0.96
+Black plastic tub / rubber disc,1,DRY_RECYCLABLE,rigid PP / rubber,5_PP,CATEGORY_I_RIGID,False,unidentified,,clean,0.9
+Crushed single-use meal plates & food packaging,3,GENERIC_RESIDUAL,polystyrene (thermocol) / coated paper,6_PS,CATEGORY_I_RIGID,True,unidentified,,crumpled,0.91
+White plastic retail carry bag / parcel package,1,DRY_RECYCLABLE,LDPE film,4_LDPE,CATEGORY_II_FLEXIBLE,True,unidentified,,crumpled,0.93
+Printed promotional flyer / paper scrap,1,DRY_RECYCLABLE,printed paper / card,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,clean,0.92
+Rotting organic food waste & vegetable peelings,1,WET,organic kitchen & market waste,NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,buried_partial,0.95
+"Inert street sweepings, silt & fine C&D gravel",1,GENERIC_RESIDUAL,"soil, sand, road silt",NON_PLASTIC,NOT_APPLICABLE,False,unidentified,,buried_partial,0.92

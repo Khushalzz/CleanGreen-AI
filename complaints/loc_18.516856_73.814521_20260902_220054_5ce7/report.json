@@ -1,0 +1,629 @@
+{
+  "scene_type": "dumpsite",
+  "item_count_total": 27,
+  "items": [
+    {
+      "item_name": "Weathered EPS Thermocol Fish/Produce Box (Improvised Waste Bin)",
+      "count": 1,
+      "box_2d": [
+        615,
+        230,
+        866,
+        518
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Expanded Polystyrene (EPS)",
+      "resin_code": "6_PS",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.98
+    },
+    {
+      "item_name": "Broken EPS Thermocol Box Lid & Slabs",
+      "count": 2,
+      "box_2d": [
+        640,
+        60,
+        796,
+        235
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Expanded Polystyrene (EPS)",
+      "resin_code": "6_PS",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Rectangular Molded EPS Thermocol Packing Crate",
+      "count": 1,
+      "box_2d": [
+        422,
+        90,
+        608,
+        265
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Expanded Polystyrene (EPS)",
+      "resin_code": "6_PS",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "clean",
+      "confidence": 0.97
+    },
+    {
+      "item_name": "Translucent Green Plastic Carry Bag with Organic Waste",
+      "count": 1,
+      "box_2d": [
+        568,
+        235,
+        693,
+        381
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Low-Density Polyethylene (LDPE)",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Single-use plastic carry bag without mandatory EPR markings, estimated < 120 microns",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Translucent Green Polythene Bag with Citrus & Vegetable Trimmings",
+      "count": 1,
+      "box_2d": [
+        558,
+        362,
+        663,
+        452
+      ],
+      "stream": "WET",
+      "material": "LDPE film with organic contents",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Thin single-use plastic grocery bag used for bio-waste disposal",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "Printed Pressure Cooker Cardboard Packaging Box",
+      "count": 1,
+      "box_2d": [
+        516,
+        289,
+        584,
+        362
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Cardboard / Paperboard",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.9
+    },
+    {
+      "item_name": "Food-Soiled Disposable Serving Plates with Gravy Residue",
+      "count": 3,
+      "box_2d": [
+        480,
+        396,
+        560,
+        480
+      ],
+      "stream": "GENERIC_RESIDUAL",
+      "material": "Coated Paper / Disposable Plate",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.93
+    },
+    {
+      "item_name": "Tide Laundry Detergent Packaging Sachet",
+      "count": 1,
+      "box_2d": [
+        765,
+        140,
+        839,
+        236
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Multi-layer plastic film (MLP / LDPE laminate)",
+      "resin_code": "7_OTHER_MLP",
+      "epr_category": "CATEGORY_III_MULTILAYER",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "Tide",
+      "parent_company": "Procter & Gamble (P&G)",
+      "evidence_text": "Tide",
+      "condition": "crumpled",
+      "confidence": 0.99
+    },
+    {
+      "item_name": "Soya Chips Metallized Snack Packaging Pouch",
+      "count": 1,
+      "box_2d": [
+        946,
+        144,
+        1000,
+        215
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Metallized Biaxially Oriented Polypropylene (BOPP / MLP)",
+      "resin_code": "7_OTHER_MLP",
+      "epr_category": "CATEGORY_III_MULTILAYER",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "Soya Chips",
+      "parent_company": null,
+      "evidence_text": "Soya Chips",
+      "condition": "crumpled",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Decomposing Banana Peels & Organic Food Residues",
+      "count": 1,
+      "box_2d": [
+        834,
+        4,
+        990,
+        195
+      ],
+      "stream": "WET",
+      "material": "Biodegradable organic matter",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.98
+    },
+    {
+      "item_name": "Pink Thin Plastic Carry Bag",
+      "count": 1,
+      "box_2d": [
+        360,
+        315,
+        420,
+        385
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Low-Density Polyethylene (LDPE)",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Single-use thin polythene carry bag < 120 microns without manufacturer EPR registration markings",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Yellow Plastic Carry Bag",
+      "count": 1,
+      "box_2d": [
+        425,
+        275,
+        485,
+        365
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Low-Density Polyethylene (LDPE)",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Single-use colored plastic carry bag < 120 microns",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.94
+    },
+    {
+      "item_name": "Discarded Blue Disposable Surgical Face Mask",
+      "count": 1,
+      "box_2d": [
+        405,
+        450,
+        435,
+        485
+      ],
+      "stream": "BIOMEDICAL_HAZARD",
+      "material": "Non-woven Polypropylene (PP) with elastic ear loops",
+      "resin_code": "5_PP",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.91
+    },
+    {
+      "item_name": "Black Cherry Sortex Boiled Rice Woven HDPE Sack",
+      "count": 1,
+      "box_2d": [
+        288,
+        794,
+        421,
+        898
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Woven High-Density Polyethylene (HDPE)",
+      "resin_code": "2_HDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "Black Cherry",
+      "parent_company": null,
+      "evidence_text": "Black Cherry Sortex Boiled Rice",
+      "condition": "crumpled",
+      "confidence": 0.98
+    },
+    {
+      "item_name": "Heavy-Duty Black Polyethylene Trash Bag / Liner",
+      "count": 1,
+      "box_2d": [
+        395,
+        693,
+        486,
+        810
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Low-Density Polyethylene (LDPE)",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Black Heavy Polythene Waste Sack",
+      "count": 1,
+      "box_2d": [
+        466,
+        698,
+        649,
+        825
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Low-Density Polyethylene (LDPE)",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.97
+    },
+    {
+      "item_name": "Yellow Woven HDPE Polymer Bag / Sack",
+      "count": 1,
+      "box_2d": [
+        508,
+        609,
+        755,
+        814
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Woven High-Density Polyethylene (HDPE)",
+      "resin_code": "2_HDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.95
+    },
+    {
+      "item_name": "Coarse Jute / Burlap Gunny Sack",
+      "count": 1,
+      "box_2d": [
+        478,
+        843,
+        604,
+        988
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Natural Jute Fiber / Burlap",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.94
+    },
+    {
+      "item_name": "Shredded Industrial Plastic Packaging Straps / Bands",
+      "count": 1,
+      "box_2d": [
+        390,
+        845,
+        490,
+        975
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Polypropylene (PP) Strapping",
+      "resin_code": "5_PP",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "Dry Straw / Hay / Biomass Fiber Layer",
+      "count": 1,
+      "box_2d": [
+        588,
+        517,
+        788,
+        725
+      ],
+      "stream": "WET",
+      "material": "Agricultural Straw / Biomass",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.97
+    },
+    {
+      "item_name": "Soiled English Daily Broadsheet Newspaper Pages",
+      "count": 2,
+      "box_2d": [
+        582,
+        683,
+        686,
+        784
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Newsprint Paper",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": "breastfeeding in public through pictures",
+      "condition": "crumpled",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Discarded Whole Red Tomatoes",
+      "count": 3,
+      "box_2d": [
+        805,
+        665,
+        838,
+        742
+      ],
+      "stream": "WET",
+      "material": "Organic Vegetable Matter",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.96
+    },
+    {
+      "item_name": "Crushed Fruit Juice Beverage Pack",
+      "count": 1,
+      "box_2d": [
+        888,
+        646,
+        936,
+        700
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Multi-layer Paperboard / Aluminum / Plastic Composite (Aseptic Pack)",
+      "resin_code": "7_OTHER_MLP",
+      "epr_category": "CATEGORY_III_MULTILAYER",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": "Juicy O",
+      "condition": "crumpled",
+      "confidence": 0.91
+    },
+    {
+      "item_name": "Discarded Cigarette Paperboard Pack",
+      "count": 1,
+      "box_2d": [
+        858,
+        650,
+        888,
+        686
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Paperboard with metallized foil liner",
+      "resin_code": "NON_PLASTIC",
+      "epr_category": "NOT_APPLICABLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.9
+    },
+    {
+      "item_name": "Crushed Clear PET Beverage Bottle",
+      "count": 1,
+      "box_2d": [
+        781,
+        832,
+        813,
+        882
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Polyethylene Terephthalate (PET)",
+      "resin_code": "1_PET",
+      "epr_category": "CATEGORY_I_RIGID",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "crumpled",
+      "confidence": 0.93
+    },
+    {
+      "item_name": "White Polypropylene Packaging Twine",
+      "count": 1,
+      "box_2d": [
+        897,
+        240,
+        977,
+        362
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Polypropylene (PP)",
+      "resin_code": "5_PP",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": false,
+      "sup_violation_reason": null,
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.92
+    },
+    {
+      "item_name": "Mixed Paper & Polythene Packaging Wrappers Cluster",
+      "count": 5,
+      "box_2d": [
+        345,
+        365,
+        460,
+        525
+      ],
+      "stream": "DRY_RECYCLABLE",
+      "material": "Mixed Paper, Cardboard & LDPE films",
+      "resin_code": "4_LDPE",
+      "epr_category": "CATEGORY_II_FLEXIBLE",
+      "sup_violation": true,
+      "sup_violation_reason": "Discarded unsegregated single-use plastic films and wrapping",
+      "brand": "unidentified",
+      "parent_company": null,
+      "evidence_text": null,
+      "condition": "torn",
+      "confidence": 0.91
+    }
+  ],
+  "hazard_flag": true,
+  "hazard_items": [
+    "Discarded Blue Disposable Surgical Face Mask (Potential biological/pathogenic vector)"
+  ],
+  "safety_warning": "BIOHAZARD WARNING: Discarded personal surgical face mask detected in open public dumpsite without containment. Waste sanitation personnel must wear puncture-resistant gloves and protective masks during clearance to prevent exposure to communicable pathogens.",
+  "contamination": true,
+  "contaminated_fraction": 0.55,
+  "segregation_verdict": "mixed",
+  "estimated_weight_kg": 48.5,
+  "epr_summary": {
+    "total_plastic_items": 19,
+    "recyclable_plastic_items": 15,
+    "non_recyclable_plastic_items": 4,
+    "sup_violation_count": 5,
+    "brand_owner_liability_share": {
+      "Procter & Gamble (P&G) [Tide]": 33.3,
+      "Black Cherry Sortex Rice": 33.3,
+      "Soya Chips": 33.4
+    }
+  },
+  "disposal_routes": {
+    "municipal_green_bin": [
+      "Decomposing Banana Peels & Organic Food Residues",
+      "Translucent Green Polythene Bag with Citrus & Vegetable Trimmings",
+      "Discarded Whole Red Tomatoes",
+      "Dry Straw / Hay / Biomass Fiber Layer"
+    ],
+    "municipal_blue_bin": [
+      "Weathered EPS Thermocol Fish/Produce Box (Improvised Waste Bin)",
+      "Broken EPS Thermocol Box Lid & Slabs",
+      "Rectangular Molded EPS Thermocol Packing Crate",
+      "Black Cherry Sortex Boiled Rice Woven HDPE Sack",
+      "Heavy-Duty Black Polyethylene Trash Bag / Liner",
+      "Black Heavy Polythene Waste Sack",
+      "Yellow Woven HDPE Polymer Bag / Sack",
+      "Coarse Jute / Burlap Gunny Sack",
+      "Crushed Clear PET Beverage Bottle",
+      "Printed Pressure Cooker Cardboard Packaging Box",
+      "Soiled English Daily Broadsheet Newspaper Pages",
+      "Tide Laundry Detergent Packaging Sachet",
+      "Soya Chips Metallized Snack Packaging Pouch",
+      "White Polypropylene Packaging Twine"
+    ],
+    "red_bag_sanitary": [],
+    "special_handover_required": [
+      {
+        "items": [
+          "Discarded Blue Disposable Surgical Face Mask"
+        ],
+        "route": "biomedical collection",
+        "reason": "Infectious / pathogenic risk from discarded personal protective equipment (PPE) requiring autoclaving or yellow/red bag biomedical incineration"
+      }
+    ]
+  },
+  "recoverability_summary": "Substantial dry recyclable potential in EPS crates, woven HDPE sacks, and scrap paperboard, but value realization is severely compromised by wet food waste sludge and organic cross-contamination.",
+  "image_quality_note": "High-resolution nighttime outdoor photograph under overhead lamppost lighting with sharp focus across the midground and minor shadow occlusion on the periphery."
+}

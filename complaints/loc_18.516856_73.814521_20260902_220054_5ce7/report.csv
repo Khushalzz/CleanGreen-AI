@@ -1,0 +1,28 @@
+Item Name,Count,Stream,Material,Resin Code,EPR Category,SUP Violation,SUP Reason,Brand,Parent Company,Condition,Confidence,Box_YMin,Box_XMin,Box_YMax,Box_XMax
+Weathered EPS Thermocol Fish/Produce Box (Improvised Waste Bin),1,DRY_RECYCLABLE,Expanded Polystyrene (EPS),6_PS,CATEGORY_I_RIGID,False,,unidentified,,crumpled,0.98,615,230,866,518
+Broken EPS Thermocol Box Lid & Slabs,2,DRY_RECYCLABLE,Expanded Polystyrene (EPS),6_PS,CATEGORY_I_RIGID,False,,unidentified,,torn,0.96,640,60,796,235
+Rectangular Molded EPS Thermocol Packing Crate,1,DRY_RECYCLABLE,Expanded Polystyrene (EPS),6_PS,CATEGORY_I_RIGID,False,,unidentified,,clean,0.97,422,90,608,265
+Translucent Green Plastic Carry Bag with Organic Waste,1,DRY_RECYCLABLE,Low-Density Polyethylene (LDPE),4_LDPE,CATEGORY_II_FLEXIBLE,True,"Single-use plastic carry bag without mandatory EPR markings, estimated < 120 microns",unidentified,,crumpled,0.95,568,235,693,381
+Translucent Green Polythene Bag with Citrus & Vegetable Trimmings,1,WET,LDPE film with organic contents,4_LDPE,CATEGORY_II_FLEXIBLE,True,Thin single-use plastic grocery bag used for bio-waste disposal,unidentified,,crumpled,0.92,558,362,663,452
+Printed Pressure Cooker Cardboard Packaging Box,1,DRY_RECYCLABLE,Cardboard / Paperboard,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.9,516,289,584,362
+Food-Soiled Disposable Serving Plates with Gravy Residue,3,GENERIC_RESIDUAL,Coated Paper / Disposable Plate,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.93,480,396,560,480
+Tide Laundry Detergent Packaging Sachet,1,DRY_RECYCLABLE,Multi-layer plastic film (MLP / LDPE laminate),7_OTHER_MLP,CATEGORY_III_MULTILAYER,False,,Tide,Procter & Gamble (P&G),crumpled,0.99,765,140,839,236
+Soya Chips Metallized Snack Packaging Pouch,1,DRY_RECYCLABLE,Metallized Biaxially Oriented Polypropylene (BOPP / MLP),7_OTHER_MLP,CATEGORY_III_MULTILAYER,False,,Soya Chips,,crumpled,0.95,946,144,1000,215
+Decomposing Banana Peels & Organic Food Residues,1,WET,Biodegradable organic matter,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,torn,0.98,834,4,990,195
+Pink Thin Plastic Carry Bag,1,DRY_RECYCLABLE,Low-Density Polyethylene (LDPE),4_LDPE,CATEGORY_II_FLEXIBLE,True,Single-use thin polythene carry bag < 120 microns without manufacturer EPR registration markings,unidentified,,crumpled,0.95,360,315,420,385
+Yellow Plastic Carry Bag,1,DRY_RECYCLABLE,Low-Density Polyethylene (LDPE),4_LDPE,CATEGORY_II_FLEXIBLE,True,Single-use colored plastic carry bag < 120 microns,unidentified,,crumpled,0.94,425,275,485,365
+Discarded Blue Disposable Surgical Face Mask,1,BIOMEDICAL_HAZARD,Non-woven Polypropylene (PP) with elastic ear loops,5_PP,NOT_APPLICABLE,False,,unidentified,,crumpled,0.91,405,450,435,485
+Black Cherry Sortex Boiled Rice Woven HDPE Sack,1,DRY_RECYCLABLE,Woven High-Density Polyethylene (HDPE),2_HDPE,CATEGORY_II_FLEXIBLE,False,,Black Cherry,,crumpled,0.98,288,794,421,898
+Heavy-Duty Black Polyethylene Trash Bag / Liner,1,DRY_RECYCLABLE,Low-Density Polyethylene (LDPE),4_LDPE,CATEGORY_II_FLEXIBLE,False,,unidentified,,crumpled,0.96,395,693,486,810
+Black Heavy Polythene Waste Sack,1,DRY_RECYCLABLE,Low-Density Polyethylene (LDPE),4_LDPE,CATEGORY_II_FLEXIBLE,False,,unidentified,,crumpled,0.97,466,698,649,825
+Yellow Woven HDPE Polymer Bag / Sack,1,DRY_RECYCLABLE,Woven High-Density Polyethylene (HDPE),2_HDPE,CATEGORY_II_FLEXIBLE,False,,unidentified,,torn,0.95,508,609,755,814
+Coarse Jute / Burlap Gunny Sack,1,DRY_RECYCLABLE,Natural Jute Fiber / Burlap,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.94,478,843,604,988
+Shredded Industrial Plastic Packaging Straps / Bands,1,DRY_RECYCLABLE,Polypropylene (PP) Strapping,5_PP,CATEGORY_II_FLEXIBLE,False,,unidentified,,torn,0.92,390,845,490,975
+Dry Straw / Hay / Biomass Fiber Layer,1,WET,Agricultural Straw / Biomass,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.97,588,517,788,725
+Soiled English Daily Broadsheet Newspaper Pages,2,DRY_RECYCLABLE,Newsprint Paper,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.96,582,683,686,784
+Discarded Whole Red Tomatoes,3,WET,Organic Vegetable Matter,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,torn,0.96,805,665,838,742
+Crushed Fruit Juice Beverage Pack,1,DRY_RECYCLABLE,Multi-layer Paperboard / Aluminum / Plastic Composite (Aseptic Pack),7_OTHER_MLP,CATEGORY_III_MULTILAYER,False,,unidentified,,crumpled,0.91,888,646,936,700
+Discarded Cigarette Paperboard Pack,1,DRY_RECYCLABLE,Paperboard with metallized foil liner,NON_PLASTIC,NOT_APPLICABLE,False,,unidentified,,crumpled,0.9,858,650,888,686
+Crushed Clear PET Beverage Bottle,1,DRY_RECYCLABLE,Polyethylene Terephthalate (PET),1_PET,CATEGORY_I_RIGID,False,,unidentified,,crumpled,0.93,781,832,813,882
+White Polypropylene Packaging Twine,1,DRY_RECYCLABLE,Polypropylene (PP),5_PP,CATEGORY_II_FLEXIBLE,False,,unidentified,,torn,0.92,897,240,977,362
+Mixed Paper & Polythene Packaging Wrappers Cluster,5,DRY_RECYCLABLE,"Mixed Paper, Cardboard & LDPE films",4_LDPE,CATEGORY_II_FLEXIBLE,True,Discarded unsegregated single-use plastic films and wrapping,unidentified,,torn,0.91,345,365,460,525
