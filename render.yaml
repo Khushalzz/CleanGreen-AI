@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: cleangreen-aies-mini
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: NO_BROWSER
+        value: "1"
+      - key: CV_ML
+        value: "0"
+      - key: COMPLAINTS_DIR
+        value: /tmp/cleangreen-complaints

@@ -106,3 +106,15 @@ python3 server.py
 Double-click **`start.bat`** in the project root or inside `front end/`.
 
 Open **`http://localhost:8000`** in your browser. Admin console: **`http://localhost:8000/admin`**.
+
+## Deploy on Render
+
+The root `render.yaml` deploys the Python server and frontend together as one
+Render Web Service. Create a Blueprint from this repository. The service uses
+Render's assigned `PORT` and disables the optional CLIP model to fit the free
+instance. Without `GEMINI_API_KEY`, complaint analysis falls back to the local
+colour/edge pipeline.
+
+The free instance stores complaint files under `/tmp`, which is temporary.
+Uploads can disappear when Render restarts or spins the service down. Use a
+persistent disk or external storage if complaints must survive those events.

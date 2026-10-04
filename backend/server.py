@@ -35,7 +35,7 @@ OSM_BINS_FILE = BASE_DIR / "pune_osm_bins.json"
 sys.path.insert(0, str(BACKEND_DIR))
 from analyzer import save_initial_complaint, run_background_ai_analysis, build_metrics
 
-PORT = 8000
+PORT = int(os.environ.get("PORT", "8000"))
 
 # Maps sha256(photo bytes) -> complaint_id so the same photo can never create two reports.
 _SUBMITTED_IMAGE_HASHES = {}
