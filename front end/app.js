@@ -167,6 +167,42 @@ function fallbackAddress() {
   resolvedAddressEl.textContent = fallback;
 }
 
+function normalizeLocationName(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function refineLocationResults(locations, query) {
+  const parts = query.split(",").map((part) => part.trim()).filter(Boolean);
+  const placeName = normalizeLocationName(parts[0] || query);
+  const exactMatches = locations.filter((place) => normalizeLocationName(place.name) === placeName);
+  let matches = exactMatches.length ? exactMatches : locations;
+
+  if (parts.length > 1) {
+    const qualifiers = parts.slice(1).map(normalizeLocationName);
+    const qualifiedMatches = matches.filter((place) => {
+      const fields = [place.admin1, place.admin2, place.admin3, place.country, place.country_code]
+        .map(normalizeLocationName);
+      return qualifiers.every((qualifier) => fields.includes(qualifier));
+    });
+    if (qualifiedMatches.length) matches = qualifiedMatches;
+  }
+
+  // A country name can also match small towns elsewhere; prefer the country result.
+  const countryMatches = matches.filter((place) =>
+    place.feature_code === "PCLI" && normalizeLocationName(place.country) === placeName
+  );
+  if (countryMatches.length) return countryMatches.slice(0, 1);
+
+  return matches
+    .sort((left, right) => (Number(right.population) || 0) - (Number(left.population) || 0))
+    .slice(0, 5);
+}
+
 // Place-name lookups happen only after an explicit Search action (never per keystroke).
 async function searchMapLocation() {
   const query = mapSearchInput.value.trim();
@@ -195,14 +231,14 @@ async function searchMapLocation() {
     const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`);
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(payload.reason || "Place search is temporarily unavailable.");
-    const locations = payload.results || [];
+    const locations = refineLocationResults(payload.results || [], query);
     if (!locations.length) {
       mapSearchStatus.textContent = "No places found. Try adding a country, or enter coordinates.";
       return;
     }
 
     locations.forEach((place) => {
-      const label = [place.name, place.admin1, place.country].filter(Boolean).join(", ");
+      const label = [...new Set([place.name, place.admin1, place.country].filter(Boolean))].join(", ");
       const result = document.createElement("button");
       result.type = "button";
       result.className = "map-search-result";
