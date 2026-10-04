@@ -1,5 +1,5 @@
 // ==========================================================================
-// Clean and Green Tech — Team Pixel Minds
+// Clean and Green Tech — AIES Mini Project
 // Geo-Spatial Waste Spotter & Garbage-Vision AI Pipeline
 // Default Location: MIT-WPU, Kothrud, Pune, Maharashtra (18.5178, 73.8151)
 // ==========================================================================
@@ -49,6 +49,10 @@ const lngValEl = document.getElementById("lng-val");
 const resolvedAddressEl = document.getElementById("resolved-address");
 const btnLocateMe = document.getElementById("btn-locate-me");
 const btnResetMit = document.getElementById("btn-reset-mit");
+const mapSearchInput = document.getElementById("map-search-input");
+const btnMapSearch = document.getElementById("btn-map-search");
+const mapSearchStatus = document.getElementById("map-search-status");
+const mapSearchResults = document.getElementById("map-search-results");
 const reportForm = document.getElementById("report-form");
 
 // Snappy Loading Screen Elements
@@ -159,6 +163,76 @@ function fallbackAddress() {
   const fallback = `Paud Road, Kothrud, Pune (${state.selectedLat}, ${state.selectedLng})`;
   state.resolvedAddress = fallback;
   resolvedAddressEl.textContent = fallback;
+}
+
+// Place-name lookups happen only after an explicit Search action (never per keystroke).
+async function searchMapLocation() {
+  const query = mapSearchInput.value.trim();
+  mapSearchResults.replaceChildren();
+  if (!query) {
+    mapSearchStatus.textContent = "Enter a city, postal code, or latitude and longitude.";
+    return;
+  }
+
+  const coordinates = query.match(/^\s*(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)\s*$/);
+  if (coordinates) {
+    const lat = Number(coordinates[1]);
+    const lng = Number(coordinates[2]);
+    if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+      mapSearchStatus.textContent = "Coordinates must be latitude, longitude within valid ranges.";
+      return;
+    }
+    selectMapSearchResult(lat, lng, "Coordinates", 16);
+    return;
+  }
+
+  btnMapSearch.disabled = true;
+  mapSearchStatus.textContent = "Searching places…";
+  try {
+    const params = new URLSearchParams({ name: query, count: "6", language: "en", format: "json" });
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`);
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.reason || "Place search is temporarily unavailable.");
+    const locations = payload.results || [];
+    if (!locations.length) {
+      mapSearchStatus.textContent = "No places found. Try adding a country, or enter coordinates.";
+      return;
+    }
+
+    locations.forEach((place) => {
+      const label = [place.name, place.admin1, place.country].filter(Boolean).join(", ");
+      const result = document.createElement("button");
+      result.type = "button";
+      result.className = "map-search-result";
+      const name = document.createElement("span");
+      name.className = "map-search-result-name";
+      name.textContent = label;
+      const coords = document.createElement("span");
+      coords.className = "map-search-result-coordinates";
+      coords.textContent = `${Number(place.latitude).toFixed(5)}, ${Number(place.longitude).toFixed(5)}`;
+      result.append(name, coords);
+      result.addEventListener("click", () => selectMapSearchResult(
+        Number(place.latitude),
+        Number(place.longitude),
+        label,
+      ));
+      mapSearchResults.appendChild(result);
+    });
+    mapSearchStatus.textContent = "Choose a result to move the map pin.";
+  } catch (error) {
+    mapSearchStatus.textContent = error.message || "Place search failed. Try coordinates instead.";
+  } finally {
+    btnMapSearch.disabled = false;
+  }
+}
+
+function selectMapSearchResult(lat, lng, label, zoom = 15) {
+  btnResetMit.classList.remove("active-location");
+  btnLocateMe.classList.remove("active-location");
+  updateLocation(lat, lng);
+  map.setView([lat, lng], zoom, { animate: true });
+  mapSearchResults.replaceChildren();
+  mapSearchStatus.textContent = `Map moved to ${label}. Pinpoint the exact spot, then submit your report.`;
 }
 
 // ==========================================================================
@@ -295,6 +369,14 @@ function setupAdvancedToggle() {
 // 4. Map Controls & Backend Complaint Submission
 // ==========================================================================
 function setupControls() {
+  btnMapSearch.addEventListener("click", searchMapLocation);
+  mapSearchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchMapLocation();
+    }
+  });
+
   btnLocateMe.addEventListener("click", () => {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");

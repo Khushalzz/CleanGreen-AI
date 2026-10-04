@@ -1,6 +1,6 @@
 /* ==========================================================================
    Clean and Green Tech — Admin Console Styling
-   Team Pixel Minds
+   AIES Mini Project
    ========================================================================== */
 
 :root {
@@ -112,7 +112,7 @@ body {
   font-size: 1.15rem;
 }
 
-.team-tag {
+.project-tag {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1165,4 +1165,3 @@ body {
   50% { opacity: 1; }
   100% { top: 100%; opacity: 0.2; }
 }
-

@@ -1,6 +1,6 @@
 // ==========================================================================
 // Clean and Green Tech — Admin Console & Live Route Operations
-// Team Pixel Minds
+// AIES Mini Project
 // ==========================================================================
 
 function esc(value) {
@@ -1277,4 +1277,3 @@ function getSamplePuneComplaints() {
     }
   ];
 }
-

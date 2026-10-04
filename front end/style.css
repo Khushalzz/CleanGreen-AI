@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Clean and Green Tech — Team Pixel Minds
+   Clean and Green Tech — AIES Mini Project
    Engineering-Grade Geo-Spatial Waste Spotter Interface
    ========================================================================== */
 
@@ -98,7 +98,7 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
-.team-tag {
+.project-tag {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -552,6 +552,7 @@ textarea:focus {
    ========================================================================== */
 .map-controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
@@ -584,6 +585,102 @@ textarea:focus {
   background-color: #f0fdf4;
   border-color: var(--primary-border);
   color: var(--primary-dark);
+}
+
+.map-search {
+  margin: 0 0 0.75rem;
+}
+
+.map-search-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.map-search-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--slate-700);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.map-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.52rem 0.7rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--slate-900);
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.map-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.map-search-button {
+  white-space: nowrap;
+}
+
+.map-search-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.map-search-help,
+.map-search-attribution,
+.map-search-status {
+  margin: 0.35rem 0 0;
+  color: var(--slate-500);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.map-search-attribution a {
+  color: var(--primary-dark);
+}
+
+.map-search-results {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.map-search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--slate-800);
+  font: inherit;
+  font-size: 0.74rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.map-search-result:hover,
+.map-search-result:focus-visible {
+  border-color: var(--primary-border);
+  background: #f0fdf4;
+}
+
+.map-search-result-name {
+  font-weight: 700;
+}
+
+.map-search-result-coordinates {
+  color: var(--slate-500);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.66rem;
+  white-space: nowrap;
 }
 
 .map-wrapper {
@@ -1152,6 +1249,14 @@ textarea:focus {
   }
 }
 
+@media (max-width: 520px) {
+  .map-search-result {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
 .reward-item-card {
   background: #f8fafc;
   border: 1px solid var(--slate-200);
@@ -1431,4 +1536,3 @@ textarea:focus {
   background: #e2e8f0;
   color: var(--slate-900);
 }
-

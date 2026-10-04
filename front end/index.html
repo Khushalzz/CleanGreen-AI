@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clean and Green Tech | Team Pixel Minds</title>
+  <title>CleanGreen AI | AIES Mini Project</title>
 
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +26,8 @@
     <div class="nav-container">
       <div class="brand">
         <div class="brand-text">
-          <div class="team-tag">
-            <i class="fa-solid fa-code"></i> TEAM PIXEL MINDS
+          <div class="project-tag">
+            <i class="fa-solid fa-code"></i> AIES MINI PROJECT
           </div>
           <h1 class="brand-title">Clean and Green Tech</h1>
         </div>
@@ -158,6 +158,30 @@
           <button type="button" class="control-btn active-location" id="btn-reset-mit" title="Reset map to MIT-WPU Kothrud">
             <i class="fa-solid fa-graduation-cap"></i> MIT-WPU Kothrud
           </button>
+        </div>
+
+        <div class="map-search" role="search" aria-label="Search map location">
+          <label class="map-search-label" for="map-search-input">Search a place or coordinates</label>
+          <div class="map-search-row">
+            <input
+              id="map-search-input"
+              class="map-search-input"
+              type="search"
+              maxlength="120"
+              placeholder="Search a city or enter latitude, longitude"
+              autocomplete="off"
+              aria-describedby="map-search-help map-search-status"
+            />
+            <button type="button" class="control-btn map-search-button" id="btn-map-search">
+              <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+          </div>
+          <p id="map-search-help" class="map-search-help">Try “Pune, India” or “18.5178, 73.8151”.</p>
+          <p class="map-search-attribution">
+            Place search by <a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noreferrer">Open-Meteo</a> using GeoNames data.
+          </p>
+          <div id="map-search-status" class="map-search-status" role="status" aria-live="polite"></div>
+          <div id="map-search-results" class="map-search-results" aria-live="polite"></div>
         </div>
 
         <!-- Interactive Map Element -->
@@ -292,7 +316,7 @@
           <i class="fa-solid fa-check"></i>
         </div>
         <div>
-          <div class="modal-team-tag">TEAM PIXEL MINDS // CLEAN & GREEN TECH</div>
+          <div class="modal-team-tag">AIES MINI PROJECT // CLEAN & GREEN TECH</div>
           <h3>Complaint Submitted Successfully</h3>
         </div>
         <button type="button" class="modal-close" id="btn-modal-close" aria-label="Close">&times;</button>
@@ -344,6 +368,6 @@
   <!-- Exifr JS for reading GPS tags if present in uploaded photos -->
   <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
   <!-- Application JS (Cache Busted) -->
-  <script src="app.js?v=3.2"></script>
+  <script src="app.js?v=3.3"></script>
 </body>
 </html>
