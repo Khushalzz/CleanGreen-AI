@@ -13,9 +13,11 @@ Provides:
 import http.server
 import socketserver
 import os
+import shutil
 import sys
 import json
 import base64
+import hashlib
 import urllib.parse
 import webbrowser
 import threading
@@ -24,14 +26,60 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 BACKEND_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR / "front end"
-COMPLAINTS_DIR = BASE_DIR / "complaints"
+# Render's disk is reset on every restart/redeploy; point this at a mounted
+# Persistent Disk there so filed complaints survive.
+COMPLAINTS_DIR = Path(os.environ.get("COMPLAINTS_DIR") or (BASE_DIR / "complaints"))
 COMPLAINTS_DIR.mkdir(parents=True, exist_ok=True)
 OSM_BINS_FILE = BASE_DIR / "pune_osm_bins.json"
 
 sys.path.insert(0, str(BACKEND_DIR))
-from analyzer import save_initial_complaint, run_background_ai_analysis
+from analyzer import save_initial_complaint, run_background_ai_analysis, build_metrics
 
 PORT = 8000
+
+# Maps sha256(photo bytes) -> complaint_id so the same photo can never create two reports.
+_SUBMITTED_IMAGE_HASHES = {}
+_HASH_LOCK = threading.Lock()
+
+
+def register_existing_complaint_hashes():
+    """Rebuilds the dedupe registry from disk so a server restart cannot re-report old photos."""
+    if not COMPLAINTS_DIR.exists():
+        return
+    count = 0
+    for folder in COMPLAINTS_DIR.iterdir():
+        meta_file = folder / "metadata.json"
+        if not meta_file.exists():
+            continue
+        try:
+            with open(meta_file, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+            image_hash = meta.get("image_hash")
+            complaint_id = meta.get("complaint_id")
+            if image_hash and complaint_id:
+                _SUBMITTED_IMAGE_HASHES[image_hash] = complaint_id
+                count += 1
+        except Exception as err:
+            print(f"[BACKEND] Could not read {meta_file}: {err}")
+    if count:
+        print(f"[BACKEND] Dedupe registry loaded {count} previously reported photo(s).")
+
+
+def coverage_from_boxes(items):
+    """Sum of box areas as a share of the frame, for reports saved before metrics existed.
+
+    Bounding boxes are relative 0-1000 [ymin, xmin, ymax, xmax] rectangles.
+    """
+    total = 0.0
+    for it in items:
+        box = it.get("bounding_box") or it.get("box_2d") or []
+        if len(box) == 4:
+            try:
+                total += max(0, int(box[2]) - int(box[0])) * max(0, int(box[3]) - int(box[1])) / 1_000_000
+            except (TypeError, ValueError):
+                continue
+    return min(1.0, total)
+
 
 
 class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
@@ -41,7 +89,7 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
         self.send_header('Pragma', 'no-cache')
@@ -55,6 +103,13 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         url_parsed = urllib.parse.urlparse(self.path)
         path = url_parsed.path
+        # 0. Health / Ping endpoint (Keep-Alive)
+        if path in ("/api/ping", "/api/health"):
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({"status": "ok", "message": "CleanGreen AI Backend active"}).encode('utf-8'))
+            return
 
         # 1. Admin redirect
         if path in ("/admin", "/admin/"):
@@ -121,17 +176,22 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
                                         with open(report_file, "r", encoding="utf-8") as rf:
                                             report_content = json.load(rf)
                                             items = report_content.get("items", [])
+                                            # Reports saved before the metrics engine get it computed on read.
+                                            metrics = report_content.get("metrics") or build_metrics(
+                                                items, coverage=coverage_from_boxes(items))
                                             item["stats"] = {
                                                 "item_count": len(items),
                                                 "sup_violations": sum(1 for it in items if it.get("sup_violation") is True),
                                                 "hazard_flag": report_content.get("hazard_flag", False),
-                                                "segregation_verdict": report_content.get("segregation_verdict", "unsegregated")
+                                                "segregation_verdict": report_content.get("segregation_verdict", "unsegregated"),
+                                                **metrics
                                             }
                                             item["report"] = report_content
                                     except Exception:
                                         pass
                                 else:
-                                    item["analysis_status"] = "in_progress"
+                                    if item.get("analysis_status") != "failed":
+                                        item["analysis_status"] = "in_progress"
                                     item["stats"] = {
                                         "item_count": 0,
                                         "sup_violations": 0,
@@ -143,6 +203,7 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
                             except Exception as err:
                                 print(f"Error reading complaint folder {folder.name}: {err}")
             
+            complaints.sort(key=lambda c: str(c.get("timestamp") or ""), reverse=True)
             self.wfile.write(json.dumps({"complaints": complaints, "total": len(complaints)}).encode('utf-8'))
             return
 
@@ -212,6 +273,21 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": str(e)}).encode('utf-8'))
                 return
 
+        # 1.4. Delete Complaint (and its analysis reports) — POST variant
+        if path.startswith("/api/complaints/") and path.endswith("/delete"):
+            parts = path.strip("/").split("/")
+            complaint_id = parts[2]
+            deleted = self._delete_complaint_folder(complaint_id)
+
+            self.send_response(200 if deleted else 404)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({
+                "success": deleted,
+                "deleted": complaint_id if deleted else None
+            }).encode('utf-8'))
+            return
+
         # 1.5. Retry AI Analysis on Complaint
         if path.startswith("/api/complaints/") and path.endswith("/retry"):
             parts = path.strip("/").split("/")
@@ -271,17 +347,40 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
 
                 if 'application/json' in content_type:
                     data = json.loads(post_body.decode('utf-8'))
-                    image_base64 = data.get('image_base64', '')
+                    image_base64 = data.get('image_base64', '').strip()
                     if ',' in image_base64:
                         image_base64 = image_base64.split(',', 1)[1]
+                    missing_padding = len(image_base64) % 4
+                    if missing_padding:
+                        image_base64 += '=' * (4 - missing_padding)
                     image_bytes = base64.b64decode(image_base64)
                     filename = data.get('filename', 'waste_photo.jpg')
                     lat = float(data.get('latitude', 18.5178))
                     lng = float(data.get('longitude', 73.8151))
                     address = data.get('address', 'MIT-WPU Kothrud, Pune')
                     notes = data.get('notes', '')
+                    client_complaint_id = data.get('client_complaint_id') or None
+                    client_local_time = data.get('client_local_time') or None
                 else:
                     self.send_error(400, "Content-Type must be application/json")
+                    return
+
+                image_hash = hashlib.sha256(image_bytes).hexdigest()
+
+                # 0. Refuse to register the exact same photo twice (client retry / double submit)
+                with _HASH_LOCK:
+                    existing_id = _SUBMITTED_IMAGE_HASHES.get(image_hash)
+
+                if existing_id:
+                    print(f"[BACKEND] Duplicate photo submission ignored for {existing_id}!")
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({
+                        "status": "duplicate",
+                        "complaint_id": existing_id,
+                        "message": "This photo was already reported."
+                    }, indent=2).encode('utf-8'))
                     return
 
                 # 1. Instantly save complaint folder and photo in < 50ms!
@@ -292,8 +391,14 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
                     lat=lat,
                     lng=lng,
                     address=address,
-                    notes=notes
+                    notes=notes,
+                    client_complaint_id=client_complaint_id,
+                    image_hash=image_hash,
+                    client_local_time=client_local_time
                 )
+
+                with _HASH_LOCK:
+                    _SUBMITTED_IMAGE_HASHES[image_hash] = complaint_id
 
                 print(f"[BACKEND] Complaint {complaint_id} saved instantly in {folder_path.name}!")
 
@@ -332,13 +437,109 @@ class CleanGreenRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         self.send_error(404, "Endpoint not found")
 
+    def do_DELETE(self):
+        url_parsed = urllib.parse.urlparse(self.path)
+        path = url_parsed.path
+
+        # DELETE /api/complaints/<complaint_id>
+        if path.startswith("/api/complaints/"):
+            parts = path.strip("/").split("/")
+            if len(parts) == 3:
+                complaint_id = parts[2]
+                deleted = self._delete_complaint_folder(complaint_id)
+
+                self.send_response(200 if deleted else 404)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    "success": deleted,
+                    "deleted": complaint_id if deleted else None
+                }).encode('utf-8'))
+                return
+
+        self.send_error(404, "Endpoint not found")
+
+    @staticmethod
+    def _delete_complaint_folder(complaint_id: str) -> bool:
+        """Finds the complaint folder by ID and permanently removes it with all reports."""
+        if not complaint_id or any(ch in complaint_id for ch in ("/", "\\", "..")):
+            return False
+        if not COMPLAINTS_DIR.exists():
+            return False
+        for folder in COMPLAINTS_DIR.iterdir():
+            if not folder.is_dir():
+                continue
+            meta_file = folder / "metadata.json"
+            if meta_file.exists():
+                try:
+                    with open(meta_file, "r", encoding="utf-8") as f:
+                        meta = json.load(f)
+                    if meta.get("complaint_id") == complaint_id:
+                        image_hash = meta.get("image_hash")
+                        shutil.rmtree(folder)
+                        if image_hash:
+                            with _HASH_LOCK:
+                                _SUBMITTED_IMAGE_HASHES.pop(image_hash, None)
+                        print(f"[BACKEND] Complaint {complaint_id} deleted with folder {folder.name}")
+                        return True
+                except Exception as err:
+                    print(f"[BACKEND] Error deleting complaint {complaint_id}: {err}")
+        return False
+
 
 class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     daemon_threads = True
     allow_reuse_address = True
 
 
+def _ensure_image_libraries():
+    """Vision analysis needs Pillow. If this interpreter lacks it but the project .venv has it,
+    relaunch under the venv so `python3 server.py` works regardless of which Python is used."""
+    try:
+        import PIL  # noqa: F401
+        return
+    except ImportError:
+        pass
+
+    venv_python = BASE_DIR / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    already_in_venv = sys.prefix != sys.base_prefix
+
+    if not venv_python.exists() or already_in_venv:
+        print("!! WARNING: Pillow is NOT installed in this Python interpreter.")
+        print("!! Waste photos cannot be analysed until it is available.")
+        print("!! Fix:  ./.venv/bin/python server.py   or   python3 -m pip install -r requirements.txt")
+        return
+
+    script = BASE_DIR / "server.py"
+    print(f"[SETUP] This Python has no Pillow - restarting under {venv_python}", flush=True)
+    os.execv(str(venv_python), [str(venv_python), str(script)] + sys.argv[1:])
+
+
+def _warm_vision_model():
+    """Load the CLIP verifier in the background so the first upload is not billed for it.
+
+    Hosts without torch (the Render free tier cannot hold it) print the reason once and
+    keep running on the colour/edge heuristics.
+    """
+    if os.environ.get("CV_ML", "1") == "0":
+        print("[VISION ML] CV_ML=0 - colour/edge heuristics only.", flush=True)
+        return
+    import threading
+
+    def load():
+        try:
+            import vision_ml
+            vision_ml.use_ml()
+        except Exception as err:
+            print(f"[VISION ML] Disabled ({type(err).__name__}: {err}).", flush=True)
+
+    threading.Thread(target=load, daemon=True).start()
+
+
 def run():
+    _ensure_image_libraries()
+    register_existing_complaint_hashes()
+    _warm_vision_model()
     server_address = ('', PORT)
     httpd = ThreadedHTTPServer(server_address, CleanGreenRequestHandler)
     url = f"http://localhost:{PORT}"
@@ -351,7 +552,8 @@ def run():
     print("=" * 70)
 
     try:
-        webbrowser.open(url)
+        if not os.environ.get("NO_BROWSER"):
+            webbrowser.open(url)
     except Exception:
         pass
 
