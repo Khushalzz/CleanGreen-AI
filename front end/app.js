@@ -109,6 +109,8 @@ function initMap() {
   });
 
   map.on("click", function (e) {
+    mapSearchResults.replaceChildren();
+    mapSearchStatus.textContent = "";
     updateLocation(e.latlng.lat, e.latlng.lng);
   });
 
