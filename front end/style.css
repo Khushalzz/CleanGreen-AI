@@ -626,61 +626,11 @@ textarea:focus {
   white-space: nowrap;
 }
 
-.map-search-button:disabled {
-  cursor: wait;
-  opacity: 0.65;
-}
-
-.map-search-help,
-.map-search-attribution,
 .map-search-status {
   margin: 0.35rem 0 0;
   color: var(--slate-500);
   font-size: 0.7rem;
   line-height: 1.4;
-}
-
-.map-search-attribution a {
-  color: var(--primary-dark);
-}
-
-.map-search-results {
-  display: grid;
-  gap: 0.35rem;
-  margin-top: 0.45rem;
-}
-
-.map-search-result {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.5rem 0.65rem;
-  border: 1px solid var(--slate-200);
-  border-radius: var(--radius-sm);
-  background: #fff;
-  color: var(--slate-800);
-  font: inherit;
-  font-size: 0.74rem;
-  text-align: left;
-  cursor: pointer;
-}
-
-.map-search-result:hover,
-.map-search-result:focus-visible {
-  border-color: var(--primary-border);
-  background: #f0fdf4;
-}
-
-.map-search-result-name {
-  font-weight: 700;
-}
-
-.map-search-result-coordinates {
-  color: var(--slate-500);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.66rem;
-  white-space: nowrap;
 }
 
 .map-wrapper {
@@ -1246,14 +1196,6 @@ textarea:focus {
 @media (max-width: 900px) {
   .rewards-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 520px) {
-  .map-search-result {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.2rem;
   }
 }
 

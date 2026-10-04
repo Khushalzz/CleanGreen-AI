@@ -52,7 +52,6 @@ const btnResetMit = document.getElementById("btn-reset-mit");
 const mapSearchInput = document.getElementById("map-search-input");
 const btnMapSearch = document.getElementById("btn-map-search");
 const mapSearchStatus = document.getElementById("map-search-status");
-const mapSearchResults = document.getElementById("map-search-results");
 const reportForm = document.getElementById("report-form");
 
 // Snappy Loading Screen Elements
@@ -109,7 +108,6 @@ function initMap() {
   });
 
   map.on("click", function (e) {
-    mapSearchResults.replaceChildren();
     mapSearchStatus.textContent = "";
     updateLocation(e.latlng.lat, e.latlng.lng);
   });
@@ -167,110 +165,31 @@ function fallbackAddress() {
   resolvedAddressEl.textContent = fallback;
 }
 
-function normalizeLocationName(value) {
-  return String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-}
-
-function refineLocationResults(locations, query) {
-  const parts = query.split(",").map((part) => part.trim()).filter(Boolean);
-  const placeName = normalizeLocationName(parts[0] || query);
-  const exactMatches = locations.filter((place) => normalizeLocationName(place.name) === placeName);
-  let matches = exactMatches.length ? exactMatches : locations;
-
-  if (parts.length > 1) {
-    const qualifiers = parts.slice(1).map(normalizeLocationName);
-    const qualifiedMatches = matches.filter((place) => {
-      const fields = [place.admin1, place.admin2, place.admin3, place.country, place.country_code]
-        .map(normalizeLocationName);
-      return qualifiers.every((qualifier) => fields.includes(qualifier));
-    });
-    if (qualifiedMatches.length) matches = qualifiedMatches;
-  }
-
-  // A country name can also match small towns elsewhere; prefer the country result.
-  const countryMatches = matches.filter((place) =>
-    place.feature_code === "PCLI" && normalizeLocationName(place.country) === placeName
-  );
-  if (countryMatches.length) return countryMatches.slice(0, 1);
-
-  return matches
-    .sort((left, right) => (Number(right.population) || 0) - (Number(left.population) || 0))
-    .slice(0, 5);
-}
-
-// Place-name lookups happen only after an explicit Search action (never per keystroke).
-async function searchMapLocation() {
+function searchMapCoordinates() {
   const query = mapSearchInput.value.trim();
-  mapSearchResults.replaceChildren();
   if (!query) {
-    mapSearchStatus.textContent = "Enter a city, postal code, or latitude and longitude.";
+    mapSearchStatus.textContent = "Enter latitude and longitude, separated by a comma.";
     return;
   }
 
-  const coordinates = query.match(/^\s*(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)\s*$/);
-  if (coordinates) {
-    const lat = Number(coordinates[1]);
-    const lng = Number(coordinates[2]);
-    if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-      mapSearchStatus.textContent = "Coordinates must be latitude, longitude within valid ranges.";
-      return;
-    }
-    selectMapSearchResult(lat, lng, "Coordinates", 16);
+  const coordinates = query.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
+  if (!coordinates) {
+    mapSearchStatus.textContent = "Use latitude, longitude (for example: 18.5178, 73.8151).";
     return;
   }
 
-  btnMapSearch.disabled = true;
-  mapSearchStatus.textContent = "Searching places…";
-  try {
-    const params = new URLSearchParams({ name: query, count: "6", language: "en", format: "json" });
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`);
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.reason || "Place search is temporarily unavailable.");
-    const locations = refineLocationResults(payload.results || [], query);
-    if (!locations.length) {
-      mapSearchStatus.textContent = "No places found. Try adding a country, or enter coordinates.";
-      return;
-    }
-
-    locations.forEach((place) => {
-      const label = [...new Set([place.name, place.admin1, place.country].filter(Boolean))].join(", ");
-      const result = document.createElement("button");
-      result.type = "button";
-      result.className = "map-search-result";
-      const name = document.createElement("span");
-      name.className = "map-search-result-name";
-      name.textContent = label;
-      const coords = document.createElement("span");
-      coords.className = "map-search-result-coordinates";
-      coords.textContent = `${Number(place.latitude).toFixed(5)}, ${Number(place.longitude).toFixed(5)}`;
-      result.append(name, coords);
-      result.addEventListener("click", () => selectMapSearchResult(
-        Number(place.latitude),
-        Number(place.longitude),
-        label,
-      ));
-      mapSearchResults.appendChild(result);
-    });
-    mapSearchStatus.textContent = "Choose a result to move the map pin.";
-  } catch (error) {
-    mapSearchStatus.textContent = error.message || "Place search failed. Try coordinates instead.";
-  } finally {
-    btnMapSearch.disabled = false;
+  const lat = Number(coordinates[1]);
+  const lng = Number(coordinates[2]);
+  if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+    mapSearchStatus.textContent = "Coordinates must be latitude, longitude within valid ranges.";
+    return;
   }
-}
 
-function selectMapSearchResult(lat, lng, label, zoom = 15) {
   btnResetMit.classList.remove("active-location");
   btnLocateMe.classList.remove("active-location");
   updateLocation(lat, lng);
-  map.setView([lat, lng], zoom, { animate: true });
-  mapSearchResults.replaceChildren();
-  mapSearchStatus.textContent = `Map moved to ${label}. Pinpoint the exact spot, then submit your report.`;
+  map.setView([lat, lng], 16, { animate: true });
+  mapSearchStatus.textContent = "Map moved to these coordinates. Pinpoint the exact spot, then submit your report.";
 }
 
 // ==========================================================================
@@ -407,11 +326,11 @@ function setupAdvancedToggle() {
 // 4. Map Controls & Backend Complaint Submission
 // ==========================================================================
 function setupControls() {
-  btnMapSearch.addEventListener("click", searchMapLocation);
+  btnMapSearch.addEventListener("click", searchMapCoordinates);
   mapSearchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      searchMapLocation();
+      searchMapCoordinates();
     }
   });
 

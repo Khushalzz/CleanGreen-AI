@@ -160,28 +160,24 @@
           </button>
         </div>
 
-        <div class="map-search" role="search" aria-label="Search map location">
-          <label class="map-search-label" for="map-search-input">Search a place or coordinates</label>
+        <div class="map-search" role="search" aria-label="Search map coordinates">
+          <label class="map-search-label" for="map-search-input">Search coordinates</label>
           <div class="map-search-row">
             <input
               id="map-search-input"
               class="map-search-input"
-              type="search"
-              maxlength="120"
-              placeholder="e.g. Pune, India or 18.5178, 73.8151"
+              type="text"
+              maxlength="60"
+              placeholder="Latitude, longitude (e.g. 18.5178, 73.8151)"
               autocomplete="off"
-              aria-describedby="map-search-help map-search-status"
+              inputmode="decimal"
+              aria-describedby="map-search-status"
             />
             <button type="button" class="control-btn map-search-button" id="btn-map-search">
               <i class="fa-solid fa-magnifying-glass"></i> Search
             </button>
           </div>
-          <p id="map-search-help" class="map-search-help">Search a city, postal code, or country; or enter latitude, longitude.</p>
-          <p class="map-search-attribution">
-            Place search by <a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noreferrer">Open-Meteo</a> using GeoNames data.
-          </p>
           <div id="map-search-status" class="map-search-status" role="status" aria-live="polite"></div>
-          <div id="map-search-results" class="map-search-results" aria-live="polite"></div>
         </div>
 
         <!-- Interactive Map Element -->
